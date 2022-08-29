@@ -1,15 +1,25 @@
--- Just an example, supposed to be placed in /lua/custom/
+-- Supposed to be placed in /lua/custom/
 
 local M = {}
 
 -- make sure you maintain the structure of `core/default_config.lua` here,
--- example of changing theme:
 
 M.ui = {
 	theme = "ayu-dark",
 }
 
 M.plugins = {
+
+	override = {
+		["NvChad/ui"] = {
+			statusline = {
+				-- separator_style = "block",
+				overriden_modules = function()
+					return require("custom.plugins.statusline")
+				end,
+			},
+		},
+	},
 
 	user = {
 		["neovim/nvim-lspconfig"] = {
@@ -27,5 +37,7 @@ M.plugins = {
 		},
 	},
 }
+
+M.mappings = require("custom.mappings")
 
 return M
